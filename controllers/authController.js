@@ -10,11 +10,13 @@ const renderRegisterPage = (req, res) => {
 };
 
 const registerUser = async (req, res) => {
-	console.log(req.body);
-	let { user, username, password } = req.body;
+	let { name, username, password, rePass } = req.body;
+	if (password !== rePass) {
+		return res.status(400).render("auth/register", { error: "Passwords don't match" });
+	}
 	try {
-		await authServices.register(user, username, password);
-		res.redirect("/login");
+		await authServices.register(name, username, password);
+		res.redirect("/");
 	} catch (error) {
 		res.locals.error = error.message;
 		res.render("auth/register");

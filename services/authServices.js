@@ -1,7 +1,7 @@
 const User = require("../models/User.js");
 
-const register = function (user, username, password) {
-	return User.create(user, username, password);
+const register = function (name, username, password) {
+	return User.create({ name, username, password });
 };
 
 const authServices = {

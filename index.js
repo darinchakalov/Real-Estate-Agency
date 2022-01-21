@@ -3,7 +3,6 @@ const handlerbars = require("express-handlebars");
 const cookieParser = require("cookie-parser");
 const initDB = require("./config/db-config.js");
 const router = require("./config/routes.js");
-const bodyParser = require("body-parser");
 
 const app = express();
 
@@ -15,7 +14,7 @@ app.engine(
 );
 
 app.set("view engine", "hbs");
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: true }));
 
 app.use("/static", express.static("static"));
 
