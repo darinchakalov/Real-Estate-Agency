@@ -5,6 +5,11 @@ const housingSchema = new mongoose.Schema({
 		type: String,
 		required: true,
 	},
+	type: {
+		type: String,
+		required: true,
+		enum: ["Apartment", "Villa", "House"],
+	},
 	year: {
 		type: Number,
 	},
@@ -16,7 +21,7 @@ const housingSchema = new mongoose.Schema({
 		type: String,
 		required: true,
 	},
-	propertyDescription: {
+	description: {
 		type: String,
 		required: true,
 	},
