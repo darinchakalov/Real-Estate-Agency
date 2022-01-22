@@ -14,7 +14,6 @@ exports.auth = (req, res, next) => {
 		}
 		res.user = decodedToken;
 		res.locals.user = decodedToken;
-		console.log(res.locals.user);
 		next();
 	});
 };
