@@ -5,15 +5,16 @@ exports.auth = (req, res, next) => {
 	const token = req.cookies[TOKEN_COOKIE_NAME];
 
 	if (!token) {
-		next();
+		return next();
 	}
 
-	jwt.verify(token, SECRET, (err, decodedToken) => {
+	jwt.verify(token, SECRET, function (err, decodedToken) {
 		if (err) {
-			res.status(401).redirect("/login");
+			return res.redirect("/login");
 		}
 		res.user = decodedToken;
 		res.locals.user = decodedToken;
+		console.log(res.locals.user);
 		next();
 	});
 };

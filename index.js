@@ -22,7 +22,6 @@ app.use("/static", express.static("static"));
 app.use(cookieParser());
 
 app.use(auth);
-
 router(app);
 
 initDB()
