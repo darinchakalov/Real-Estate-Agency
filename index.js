@@ -3,6 +3,7 @@ const handlerbars = require("express-handlebars");
 const cookieParser = require("cookie-parser");
 const initDB = require("./config/db-config.js");
 const router = require("./config/routes.js");
+const { auth } = require("./middlewares/authMiddleware.js");
 
 const app = express();
 
@@ -19,6 +20,9 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/static", express.static("static"));
 
 app.use(cookieParser());
+
+app.use(auth);
+
 router(app);
 
 initDB()
