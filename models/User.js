@@ -3,7 +3,7 @@ const bcrypt = require("bcrypt");
 
 const userSchema = new mongoose.Schema({
 	name: {
-		validate: [/^[A-Z][a-z]{4,} [A-Z][a-z]{3,}/i, "Please fill full name"],
+		validate: [/^[A-Za-z]{3,} [A-Za-z]{3,}/i, "Please fill full name"],
 		type: String,
 		required: [true, "Full name is mandatory"],
 	},
@@ -14,7 +14,7 @@ const userSchema = new mongoose.Schema({
 		required: [true, "Username name is mandatory"],
 	},
 	password: {
-		minlength: [5, "Password needs to bne at least 4 characters"],
+		minlength: [4, "Password needs to be at least 4 characters"],
 		type: String,
 		required: [true, "Password name is mandatory"],
 	},

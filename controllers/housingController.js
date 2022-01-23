@@ -23,7 +23,10 @@ const renderDetailsPage = async (req, res) => {
 	try {
 		let house = await housingServices.findOne(houseId);
 
-		let isOwner = res.locals.user.id == house.owner;
+		let isOwner = false;
+		if (res.locals.user) {
+			isOwner = res.locals.user.id == house.owner;
+		}
 		let notAvailable = house.availablePieces === 0;
 		res.render("details", { ...house, isOwner, notAvailable });
 	} catch (error) {

@@ -11,6 +11,11 @@ const renderHomePage = async (req, res) => {
 	}
 };
 
+const renderSearchPage = (req, res) => {
+	res.render("search");
+};
+
 router.get("/", renderHomePage);
+router.get("/search", renderSearchPage);
 
 module.exports = router;
