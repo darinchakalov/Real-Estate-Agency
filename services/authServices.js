@@ -37,6 +37,4 @@ const authServices = {
 	userExists,
 };
 
-//TODO: create function that checks if user exists
-
 module.exports = authServices;

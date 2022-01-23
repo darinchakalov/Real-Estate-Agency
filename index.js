@@ -18,6 +18,7 @@ app.set("view engine", "hbs");
 app.use(express.urlencoded({ extended: true }));
 
 app.use("/static", express.static("static"));
+app.use(express.static("static"));
 
 app.use(cookieParser());
 

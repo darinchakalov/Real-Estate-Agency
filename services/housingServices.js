@@ -8,6 +8,10 @@ const findAll = function () {
 	return Housing.find().lean();
 };
 
+const findOne = function (id) {
+	return Housing.findOne({ _id: id }).lean();
+};
+
 const create = function (name, type, year, city, homeImage, description, availablePieces) {
 	return Housing.create({ name, type, year, city, homeImage, description, availablePieces });
 };
@@ -16,6 +20,7 @@ const housingServices = {
 	findLastThree,
 	findAll,
 	create,
+	findOne,
 };
 
 module.exports = housingServices;
