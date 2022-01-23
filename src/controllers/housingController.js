@@ -49,7 +49,6 @@ const renderEditPage = async (req, res) => {
 	let houseId = req.params.id;
 	try {
 		let house = await housingServices.findOne(houseId);
-		console.log(house);
 		res.render("edit", house);
 	} catch (error) {
 		res.locals.error = error.message;

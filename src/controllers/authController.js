@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const authServices = require("../services/authServices.js");
-const { TOKEN_COOKIE_NAME } = require("../config/credentials.js");
+const { TOKEN_COOKIE_NAME } = require("../config/constants.js");
 
 const renderLoginPage = (req, res) => {
 	res.render("auth/login");

@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const { DB_PASS } = require("./credentials.js");
+const { DB_PASS } = require("./constants.js");
 
 const initDB = function () {
 	return mongoose.connect(

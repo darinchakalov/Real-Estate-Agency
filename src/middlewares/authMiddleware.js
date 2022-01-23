@@ -1,5 +1,5 @@
 const jwt = require("jsonwebtoken");
-const { TOKEN_COOKIE_NAME, SECRET } = require("../config/credentials.js");
+const { TOKEN_COOKIE_NAME, SECRET } = require("../config/constants.js");
 
 exports.auth = (req, res, next) => {
 	const token = req.cookies[TOKEN_COOKIE_NAME];
@@ -17,5 +17,3 @@ exports.auth = (req, res, next) => {
 		next();
 	});
 };
-
-
