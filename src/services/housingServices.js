@@ -16,11 +16,14 @@ const create = function (name, type, year, city, homeImage, description, availab
 	return Housing.create({ name, type, year, city, homeImage, description, availablePieces, owner: owner });
 };
 
+const search = function (name) {};
+
 const housingServices = {
 	findLastThree,
 	findAll,
 	create,
 	findOne,
+	search,
 };
 
 module.exports = housingServices;
