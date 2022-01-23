@@ -6,21 +6,11 @@ const renderCreatePage = (req, res) => {
 	res.render("create");
 };
 
-const renderRentPage = async (req, res) => {
-	try {
-		let rents = await housingServices.findAll();
-		res.render("aprt-for-recent", { rents });
-	} catch (error) {
-		res.locals.error = error.message;
-		res.render("aprt-for-recent");
-	}
-};
-
 const createHousing = async (req, res) => {
 	let { name, type, year, city, homeImage, description, availablePieces } = req.body;
-
+	let ownerId = res.user.id;
 	try {
-		await housingServices.create(name, type, year, city, homeImage, description, availablePieces);
+		await housingServices.create(name, type, year, city, homeImage, description, availablePieces, ownerId);
 		res.redirect("/rent");
 	} catch (error) {
 		res.locals.error = error.message;
@@ -32,11 +22,23 @@ const renderDetailsPage = async (req, res) => {
 	let houseId = req.params.id;
 	try {
 		let house = await housingServices.findOne(houseId);
-		console.log(house);
-		res.render("details", house);
+
+		let isOwner = res.locals.user.id == house.owner;
+		let notAvailable = house.availablePieces === 0;
+		res.render("details", { ...house, isOwner, notAvailable });
 	} catch (error) {
 		res.locals.error = error.message;
 		res.render("details");
+	}
+};
+
+const renderRentPage = async (req, res) => {
+	try {
+		let rents = await housingServices.findAll();
+		res.render("aprt-for-recent", { rents });
+	} catch (error) {
+		res.locals.error = error.message;
+		res.render("aprt-for-recent");
 	}
 };
 

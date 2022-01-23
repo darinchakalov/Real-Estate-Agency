@@ -12,8 +12,8 @@ const findOne = function (id) {
 	return Housing.findOne({ _id: id }).lean();
 };
 
-const create = function (name, type, year, city, homeImage, description, availablePieces) {
-	return Housing.create({ name, type, year, city, homeImage, description, availablePieces });
+const create = function (name, type, year, city, homeImage, description, availablePieces, owner) {
+	return Housing.create({ name, type, year, city, homeImage, description, availablePieces, owner: owner });
 };
 
 const housingServices = {

@@ -29,7 +29,7 @@ const housingSchema = new mongoose.Schema({
 		type: Number,
 		required: true,
 	},
-	rendedHome: [
+	rentedHome: [
 		{
 			type: mongoose.Schema.Types.ObjectId,
 			ref: "User",

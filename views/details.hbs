@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="../static/css/style.css" />
 <main>
 	<section id="deatils-page">
 		<div class="wrapper">
@@ -20,19 +21,24 @@
 						<p>People rented this housing: There are no tenants yet.</p>
 					</div>
 				</div>
-
+				{{#if user}}
 				<!-- if there is no registered user, do not display buttons-->
 				<div class="product-btn">
 					<!-- Only for registered user and creator of the housing offer-->
+					{{#if owner}}
 					<a href="/edit/{{_id}}" class="edit">Edit</a>
 					<a href="/delete/{{_id}}" class="remove">Delete</a>
-
+					{{/if}}
 					<!-- logged in user with available pieces-->
 					<a href="#" class="rentHome">Rent a home, available 2 housing</a>
 					<p class="alRentHome">You have already rent this home</p>
 
 					<!-- logged in user with no available pieces-->
+					
+					{{#if notAvailable}}
 					<p class="no-housing">No Housing Available!</p>
+					{{/if}}
+				{{/if}}
 				</div>
 			</div>
 		</div>

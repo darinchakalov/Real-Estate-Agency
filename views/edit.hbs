@@ -1,38 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
+<link rel="stylesheet" href="../static//css/style.css" />
 
-<head>
-    <meta charset="UTF-8">
-    <title>Edit Page</title>
-    <link href="./static/css/style.css" type="text/css" rel="stylesheet">
-</head>
-
-<body>
-
-    <div id="box">
-
-        <!-- In case of error, you should display div with class "errorContainer" -->
-        <!-- You can choose to display the first error or all of them (error message/s in your opinion) -->
-        <!--
-        <div>
-            <div class="errorContainer">
-                <p>Error</p>
-            </div>
-        </div>-->
-        <nav>
-            <a href="#">Home</a>
-            <ul>
-                <!-- Guest users and Logged users -->
-                <li><a href="#">Housing for rent</a></li>
-                <!-- Guest users -->
-                <li><a href="#">Login</a></li>
-                <li><a href="#">Register</a></li>
-                <!-- Logged users -->
-                <li><a href="#">Create offer</a></li>
-                <li><a href="#">Search</a></li>
-                <li><a href="#">Logout</a></li>
-            </ul>
-        </nav>
         
         <main>
             <section id="edit-page">
@@ -44,37 +11,37 @@
                         Edit Home
                     </h2>
 
-                    <form class="form" action="" method="">
+                    <form class="form" method="POST">
                         <div class="input">
-                            <input type="text" class="input-field" id="home-name" name="" value="" />
-                            <label class="home-name">Name:</label>
+                            <input type="text" class="input-field" id="home-name" name="name" value="" />
+                            <label class="home-name">Name: {{name}}</label>
                         </div>
                         <div class="input">
-                            <input type="text" class="input-field" id="type" name="" value="" />
-                            <label class="type">Property Type:</label>
+                            <input type="text" class="input-field" id="type" name="type" value="" />
+                            <label class="type">Property Type: {{type}}</label>
                         </div>
                         <div class="input">
-                            <input type="number" class="input-field" id="year" name="" value="" />
-                            <label class="year">Year Built:</label>
+                            <input type="number" class="input-field" id="year" name="year" value="" />
+                            <label class="year">Year Built: {{year}}</label>
                         </div>
                         <div class="input">
-                            <input type="text" class="input-field" id="city" name="" value="" />
-                            <label class="city">City</label>
-                        </div>
-
-                        <div class="input">
-                            <input type="text" class="input-field" id="homeImage" name="" value="" />
-                            <label class="homeImage">Home Image:</label>
+                            <input type="text" class="input-field" id="city" name="city" value="" />
+                            <label class="city">City: {{city}}</label>
                         </div>
 
                         <div class="input">
-                            <input type="text" class="input-field" id="description" name="" value="" />
-                            <label class="description">Property Description:</label>
+                            <input type="text" class="input-field" id="homeImage" name="homeImage" value="" />
+                            <label class="homeImage">Home Image: {{homeImage}}</label>
                         </div>
 
                         <div class="input">
-                            <input type="number" class="input-field" id="availablePieces" name="" value="" />
-                            <label class="availablePieces">Available pieces:</label>
+                            <input type="text" class="input-field" id="description" name="description" value="" />
+                            <label class="description">Property Description: {{description}}</label>
+                        </div>
+
+                        <div class="input">
+                            <input type="number" class="input-field" id="availablePieces" name="availablePieces" value="" />
+                            <label class="availablePieces">Available pieces: {{availablePieces}}</label>
                         </div>
 
                         <div class="create-action">
@@ -83,15 +50,3 @@
                     </form>
                 </div>
             </section>
-
-        </main>
-
-        <footer>
-            © 2021
-
-        </footer>
-    </div>
-
-</body>
-
-</html>
