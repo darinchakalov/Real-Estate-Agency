@@ -26,10 +26,15 @@ const createToken = function (user) {
 	return token;
 };
 
+const userExists = function (username) {
+	return User.findOne({ username: username });
+};
+
 const authServices = {
 	register,
 	login,
 	createToken,
+	userExists,
 };
 
 //TODO: create function that checks if user exists

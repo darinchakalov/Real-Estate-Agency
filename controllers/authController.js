@@ -33,6 +33,12 @@ const registerUser = async (req, res) => {
 	if (password !== rePass) {
 		return res.status(400).render("auth/register", { error: "Passwords don't match" });
 	}
+
+	let exists = await authServices.userExists(username);
+	if (exists) {
+		return res.status(400).render("auth/register", { error: "User already exists" });
+	}
+
 	try {
 		await authServices.register(name, username, password);
 		res.redirect("/");
