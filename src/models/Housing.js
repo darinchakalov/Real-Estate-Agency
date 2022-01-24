@@ -30,7 +30,7 @@ const housingSchema = new mongoose.Schema({
 		type: Number,
 		required: true,
 	},
-	rentedHome: [
+	tenants: [
 		{
 			type: mongoose.Schema.Types.ObjectId,
 			ref: "User",
@@ -40,6 +40,14 @@ const housingSchema = new mongoose.Schema({
 		type: mongoose.Schema.Types.ObjectId,
 		ref: "User",
 	},
+});
+
+housingSchema.method("getTenants", function () {
+	return this.tenants.map((x) => x.name).join(", ");
+});
+
+housingSchema.method("getAvailablePlaces", function () {
+	return this.availablePieces - this.tenants.length;
 });
 
 const Housing = mongoose.model("Housing", housingSchema);

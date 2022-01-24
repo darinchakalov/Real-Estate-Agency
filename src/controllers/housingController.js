@@ -22,16 +22,18 @@ const createHousing = async (req, res) => {
 };
 
 const renderDetailsPage = async (req, res) => {
-	let houseId = req.params.id;
 	try {
-		let house = await housingServices.findOne(houseId);
-
+		let housing = await housingServices.findOne(req.params.id);
+		let house = housing.toObject();
 		let isOwner = false;
 		if (res.locals.user) {
 			isOwner = res.locals.user.id == house.owner;
 		}
-		let notAvailable = house.availablePieces === 0;
-		res.render("details", { ...house, isOwner, notAvailable });
+		let tenants = housing.getTenants();
+		let availablePlaces = housing.getAvailablePlaces();
+		let isAvailable = availablePlaces > 0;
+		let isRendedCurrentUser = house.tenants.some((x) => x._id == res.user.id);
+		res.render("details", { ...house, isOwner, isAvailable, tenants, availablePlaces, isRendedCurrentUser });
 	} catch (error) {
 		res.locals.error = error.message;
 		res.render("details");
@@ -82,6 +84,16 @@ const deleteHouse = async (req, res) => {
 	}
 };
 
+const renting = async (req, res) => {
+	try {
+		housingServices.rent(req.params.id, res.user.id);
+		res.redirect(301, `/details/${req.params.id}`);
+	} catch (error) {
+		res.locals.error = error.message;
+		res.render("details");
+	}
+};
+
 router.get("/create", isAuth, renderCreatePage);
 router.get("/rent", renderRentPage);
 router.post("/create", createHousing);
@@ -89,5 +101,6 @@ router.get("/details/:id", isAuth, renderDetailsPage);
 router.get("/edit/:id", isAuth, renderEditPage);
 router.post("/edit/:id", editHouse);
 router.get("/delete/:id", deleteHouse);
+router.get("/renting/:id", renting);
 
 module.exports = router;
