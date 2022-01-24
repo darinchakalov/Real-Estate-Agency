@@ -4,6 +4,8 @@ const housingServices = require("../services/housingServices.js");
 const { isAuth } = require("../middlewares/authMiddleware.js");
 
 const renderCreatePage = (req, res) => {
+	console.log(req.user);
+
 	res.render("create");
 };
 
@@ -57,10 +59,23 @@ const renderEditPage = async (req, res) => {
 	}
 };
 
+const editHouse = async (req, res) => {
+	let houseId = req.params.id;
+	let house = req.body;
+	try {
+		await housingServices.edit(houseId, house);
+		res.redirect("/rent");
+	} catch (error) {
+		res.locals.error = error.message;
+		res.render("edit");
+	}
+};
+
 router.get("/create", isAuth, renderCreatePage);
 router.get("/rent", renderRentPage);
 router.post("/create", createHousing);
 router.get("/details/:id", isAuth, renderDetailsPage);
 router.get("/edit/:id", isAuth, renderEditPage);
+router.post("/edit/:id", editHouse);
 
 module.exports = router;

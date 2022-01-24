@@ -20,7 +20,7 @@ exports.auth = (req, res, next) => {
 };
 
 exports.isAuth = (req, res, next) => {
-	if (req.user) {
+	if (res.user) {
 		next();
 	} else {
 		res.redirect("/404");

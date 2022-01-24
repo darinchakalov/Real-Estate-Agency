@@ -41,6 +41,12 @@ const registerUser = async (req, res) => {
 
 	try {
 		await authServices.register(name, username, password);
+		//After successful registration create login request:
+		let user = await authServices.login(username, password);
+		let token = await authServices.createToken(user);
+		res.cookie(TOKEN_COOKIE_NAME, token, {
+			httpOnly: true,
+		});
 		res.redirect("/");
 	} catch (error) {
 		res.locals.error = error.message;

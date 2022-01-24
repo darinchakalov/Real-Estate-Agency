@@ -16,6 +16,11 @@ const create = function (name, type, year, city, homeImage, description, availab
 	return Housing.create({ name, type, year, city, homeImage, description, availablePieces, owner: owner });
 };
 
+const edit = function name(id, house) {
+	console.log(house);
+	return Housing.findByIdAndUpdate(id, house, { runValidators: true });
+};
+
 const search = function (name) {};
 
 const housingServices = {
@@ -24,6 +29,7 @@ const housingServices = {
 	create,
 	findOne,
 	search,
+	edit,
 };
 
 module.exports = housingServices;
