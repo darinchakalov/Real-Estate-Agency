@@ -1,7 +1,7 @@
 const router = require("express").Router();
 
 const housingServices = require("../services/housingServices.js");
-const { isAuth } = require("../middlewares/authMiddleware.js");
+const { isAuth, isGuest } = require("../middlewares/authMiddleware.js");
 
 const renderCreatePage = (req, res) => {
 	console.log(req.user);
@@ -27,12 +27,13 @@ const renderDetailsPage = async (req, res) => {
 		let house = housing.toObject();
 		let isOwner = false;
 		if (res.locals.user) {
+			console.log("here");
 			isOwner = res.locals.user.id == house.owner;
 		}
 		let tenants = housing.getTenants();
 		let availablePlaces = housing.getAvailablePlaces();
 		let isAvailable = availablePlaces > 0;
-		let isRendedCurrentUser = house.tenants.some((x) => x._id == res.user.id);
+		let isRendedCurrentUser = house.tenants.some((x) => x._id == res.user?.id);
 		res.render("details", { ...house, isOwner, isAvailable, tenants, availablePlaces, isRendedCurrentUser });
 	} catch (error) {
 		res.locals.error = error.message;
@@ -66,7 +67,7 @@ const editHouse = async (req, res) => {
 	let house = req.body;
 	try {
 		await housingServices.edit(houseId, house);
-		res.redirect("/rent");
+		res.redirect(`/details/${req.params.id}`);
 	} catch (error) {
 		res.locals.error = error.message;
 		res.render("edit");
@@ -97,10 +98,10 @@ const renting = async (req, res) => {
 router.get("/create", isAuth, renderCreatePage);
 router.get("/rent", renderRentPage);
 router.post("/create", createHousing);
-router.get("/details/:id", isAuth, renderDetailsPage);
+router.get("/details/:id", renderDetailsPage);
 router.get("/edit/:id", isAuth, renderEditPage);
 router.post("/edit/:id", editHouse);
-router.get("/delete/:id", deleteHouse);
-router.get("/renting/:id", renting);
+router.get("/delete/:id", isAuth, deleteHouse);
+router.get("/renting/:id", isAuth, renting);
 
 module.exports = router;

@@ -2,6 +2,8 @@ const router = require("express").Router();
 const authServices = require("../services/authServices.js");
 const { TOKEN_COOKIE_NAME } = require("../config/constants.js");
 
+const { isAuth, isGuest } = require("../middlewares/authMiddleware.js");
+
 const renderLoginPage = (req, res) => {
 	res.render("auth/login");
 };
@@ -62,10 +64,10 @@ const logout = (req, res) => {
 	res.redirect("/");
 };
 
-router.get("/login", renderLoginPage);
-router.post("/login", loginUser);
-router.get("/register", renderRegisterPage);
-router.post("/register", registerUser);
-router.get("/logout", logout);
+router.get("/login", isGuest, renderLoginPage);
+router.post("/login", isGuest, loginUser);
+router.get("/register", isGuest, renderRegisterPage);
+router.post("/register", isGuest, registerUser);
+router.get("/logout", isAuth, logout);
 
 module.exports = router;

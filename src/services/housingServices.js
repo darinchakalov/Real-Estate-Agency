@@ -37,7 +37,7 @@ const rent = async function (houseId, userId) {
 };
 
 const search = function (name) {
-	return Housing.find({ name: { $regex: name, $options: "i" } });
+	return Housing.find({ name: { $regex: name, $options: "i" } }).lean();
 };
 
 const housingServices = {
