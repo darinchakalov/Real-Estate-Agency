@@ -71,11 +71,23 @@ const editHouse = async (req, res) => {
 	}
 };
 
+const deleteHouse = async (req, res) => {
+	let houseId = req.params.id;
+	try {
+		await housingServices.del(houseId);
+		res.redirect("/rent");
+	} catch (error) {
+		res.locals.error = error.message;
+		res.render("details");
+	}
+};
+
 router.get("/create", isAuth, renderCreatePage);
 router.get("/rent", renderRentPage);
 router.post("/create", createHousing);
 router.get("/details/:id", isAuth, renderDetailsPage);
 router.get("/edit/:id", isAuth, renderEditPage);
 router.post("/edit/:id", editHouse);
+router.get("/delete/:id", deleteHouse);
 
 module.exports = router;

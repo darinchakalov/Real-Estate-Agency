@@ -1,3 +1,4 @@
+const { findOneAndDelete } = require("../models/Housing.js");
 const Housing = require("../models/Housing.js");
 
 const findLastThree = function () {
@@ -17,8 +18,11 @@ const create = function (name, type, year, city, homeImage, description, availab
 };
 
 const edit = function name(id, house) {
-	console.log(house);
 	return Housing.findByIdAndUpdate(id, house, { runValidators: true });
+};
+
+const del = function (id) {
+	return Housing.findOneAndDelete(id);
 };
 
 const search = function (name) {};
@@ -30,6 +34,7 @@ const housingServices = {
 	findOne,
 	search,
 	edit,
+	del,
 };
 
 module.exports = housingServices;
