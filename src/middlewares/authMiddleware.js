@@ -10,10 +10,19 @@ exports.auth = (req, res, next) => {
 
 	jwt.verify(token, SECRET, function (err, decodedToken) {
 		if (err) {
+			res.clearCookie(TOKEN_COOKIE_NAME);
 			return res.redirect("/login");
 		}
 		res.user = decodedToken;
 		res.locals.user = decodedToken;
 		next();
 	});
+};
+
+exports.isAuth = (req, res, next) => {
+	if (req.user) {
+		next();
+	} else {
+		res.redirect("/404");
+	}
 };

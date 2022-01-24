@@ -9,7 +9,7 @@ require("./src/config/expressConfig.js")(app);
 
 initDB()
 	.then(() => {
-		app.listen(3000, console.log(`The application is running at http://localhost:${PORT}`));
+		app.listen(PORT, console.log(`The application is running at http://localhost:${PORT}`));
 	})
 	.catch((err) => {
 		console.log("Application init failed: ", err);

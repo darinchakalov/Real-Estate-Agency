@@ -1,6 +1,7 @@
 const router = require("express").Router();
 
 const housingServices = require("../services/housingServices.js");
+const { isAuth } = require("../middlewares/authMiddleware.js");
 
 const renderCreatePage = (req, res) => {
 	res.render("create");
@@ -56,10 +57,10 @@ const renderEditPage = async (req, res) => {
 	}
 };
 
-router.get("/create", renderCreatePage);
+router.get("/create", isAuth, renderCreatePage);
 router.get("/rent", renderRentPage);
 router.post("/create", createHousing);
-router.get("/details/:id", renderDetailsPage);
-router.get("/edit/:id", renderEditPage);
+router.get("/details/:id", isAuth, renderDetailsPage);
+router.get("/edit/:id", isAuth, renderEditPage);
 
 module.exports = router;
