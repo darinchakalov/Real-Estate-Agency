@@ -17,6 +17,9 @@ To start the application please use the below command
 npm start
 ```
 
+## 1-Click demo
+https://real-estate-agency.darinchakalov1.repl.co/
+
 ## Usage
 
 The application supports the following actions:
